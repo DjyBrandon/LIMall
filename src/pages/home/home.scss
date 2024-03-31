@@ -1,0 +1,21 @@
+// 轮播图
+.swiper-container {
+    width: 100%;
+    height: 310rpx !important;
+
+    .swiper-data {
+        width: 100%;
+        height: 100%;
+        border-radius: 30rpx;
+
+        .image {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+    }
+}
+
+.title {
+    margin-top: 10rpx;
+}

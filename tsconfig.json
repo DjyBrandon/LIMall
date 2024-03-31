@@ -1,0 +1,36 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "ignoreDeprecations": "5.0",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "lib": [
+      "ESNext",
+      "Dom",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "@dcloudio/types",
+      "@tuniao/tnui-vue3-uniapp/global"
+    ],
+    "outDir": "./"
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/auto-import/components.d.ts",
+    "src/auto-import/imports.d.ts"
+  ]
+}
