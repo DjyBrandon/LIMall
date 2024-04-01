@@ -29,12 +29,12 @@
                                     <text class="symbol">
                                         ￥
                                     </text>
-                                    <!-- <text class="big-num">
+                                    <text class="big-num">
                                         {{ wxs.parsePrice(prod.price)[0] }}
                                     </text>
                                     <text class="small-num">
                                         .{{ wxs.parsePrice(prod.price)[1] }}
-                                    </text> -->
+                                    </text>
                                 </view>
                             </view>
                         </view>

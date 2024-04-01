@@ -1,7 +1,7 @@
 <template>
     <view class="register">
         <view class="con">
-            <!-- <image src="@/static/logo.png" /> -->
+            <image src="../../static/logo.png" />
             <!-- 登录 -->
             <view class="login-form">
                 <view :class="['item', errorTips == 1 ? 'error' : '']">
@@ -130,8 +130,8 @@ const toLogin = () => {
  * 回到首页
  */
 const toIndex = () => {
-    uni.switchTab({
-        url: '/pages/index/index'
+    uni.navigateBack({
+        delta: 1
     })
 }
 </script>

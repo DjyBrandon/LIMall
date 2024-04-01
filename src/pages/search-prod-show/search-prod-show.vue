@@ -6,11 +6,11 @@
                 <view class="search-box">
                     <input placeholder="输入关键字搜索" class="sear-input" :value="prodName" confirm-type="search"
                         @input="getSearchContent" @confirm="toSearchConfirm">
-                    <!-- <image src="@/static/images/icon/search.png" class="search-img" /> -->
+                    <image src="../../static/images/icon/search.png" class="search-img" />
                 </view>
                 <view class="search-list-img" @tap="changeShowType">
-                    <!-- <image v-if="showType == 1" src="@/static/images/icon/search-col.png" />
-                    <image v-if="showType == 2" src="@/static/images/icon/search-col2.png" /> -->
+                    <image v-if="showType == 1" src="../../static/images/icon/search-col.png" />
+                    <image v-if="showType == 2" src="../../static/images/icon/search-col2.png" />
                 </view>
             </view>
             <view class="tabs">
@@ -55,12 +55,12 @@
                                 <text class="symbol">
                                     ￥
                                 </text>
-                                <!-- <text class="big-num">
+                                <text class="big-num">
                                     {{ wxs.parsePrice(item.price)[0] }}
                                 </text>
                                 <text class="small-num">
                                     .{{ wxs.parsePrice(item.price)[1] }}
-                                </text> -->
+                                </text>
                             </view>
                         </view>
                     </view>

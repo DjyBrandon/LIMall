@@ -7,7 +7,7 @@
                     <view v-if="!userAddr" class="addr-bg ">
                         <view class="add-addr">
                             <view class="plus-sign-img">
-                                <!-- <image src="@/static/images/icon/plus-sign.png" /> -->
+                                <image src="../../static/images/icon/plus-sign.png" />
                             </view>
                             <text>新增收货地址</text>
                         </view>
@@ -15,7 +15,7 @@
                     </view>
                     <view v-if="userAddr" class="addr-bg whole">
                         <view class="addr-icon">
-                            <!-- <image src="@/static/images/icon/addr.png" /> -->
+                            <image src="../../static/images/icon/addr.png" />
                         </view>
                         <view class="user-info">
                             <text class="item">
@@ -51,12 +51,12 @@
                                         <text class="symbol">
                                             ￥
                                         </text>
-                                        <!-- <text class="big-num">
+                                        <text class="big-num">
                                             {{ wxs.parsePrice(item.price)[0] }}
                                         </text>
                                         <text class="small-num">
                                             .{{ wxs.parsePrice(item.price)[1] }}
-                                        </text> -->
+                                        </text>
                                     </text>
                                     <text class="prodcount">
                                         x{{ item.prodCount }}
@@ -75,12 +75,12 @@
                             <text class="symbol">
                                 ￥
                             </text>
-                            <!-- <text class="big-num">
+                            <text class="big-num">
                                 {{ wxs.parsePrice(total)[0] }}
                             </text>
                             <text class="small-num">
                                 .{{ wxs.parsePrice(total)[1] }}
-                            </text> -->
+                            </text>
                         </view>
                     </view>
                 </view>
@@ -117,12 +117,12 @@
                                 <text class="symbol">
                                     ￥
                                 </text>
-                                <!-- <text class="big-num">
+                                <text class="big-num">
                                     {{ wxs.parsePrice(total)[0] }}
                                 </text>
                                 <text class="small-num">
                                     .{{ wxs.parsePrice(total)[1] }}
-                                </text> -->
+                                </text>
                             </view>
                         </view>
                         <view class="item">
@@ -133,12 +133,12 @@
                                 <text class="symbol">
                                     ￥
                                 </text>
-                                <!-- <text class="big-num">
+                                <text class="big-num">
                                     {{ wxs.parsePrice(transfee)[0] }}
                                 </text>
                                 <text class="small-num">
                                     .{{ wxs.parsePrice(transfee)[1] }}
-                                </text> -->
+                                </text>
                             </view>
                         </view>
                         <view class="item">
@@ -149,12 +149,12 @@
                                 <text class="symbol">
                                     -￥
                                 </text>
-                                <!-- <text class="big-num">
+                                <text class="big-num">
                                     {{ wxs.parsePrice(shopReduce)[0] }}
                                 </text>
                                 <text class="small-num">
                                     .{{ wxs.parsePrice(shopReduce)[1] }}
-                                </text> -->
+                                </text>
                             </view>
                         </view>
                         <view class="item payment">
@@ -163,12 +163,12 @@
                                 <text class="symbol">
                                     ￥
                                 </text>
-                                <!-- <text class="big-num">
+                                <text class="big-num">
                                     {{ wxs.parsePrice(actualTotal)[0] }}
                                 </text>
                                 <text class="small-num">
                                     .{{ wxs.parsePrice(actualTotal)[1] }}
-                                </text> -->
+                                </text>
                             </view>
                         </view>
                     </view>
@@ -184,12 +184,12 @@
                             <text class="symbol">
                                 ￥
                             </text>
-                            <!-- <text class="big-num">
+                            <text class="big-num">
                                 {{ wxs.parsePrice(actualTotal)[0] }}
                             </text>
                             <text class="small-num">
                                 .{{ wxs.parsePrice(actualTotal)[1] }}
-                            </text> -->
+                            </text>
                         </view>
                     </view>
                 </view>

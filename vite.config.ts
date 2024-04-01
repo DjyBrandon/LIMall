@@ -8,7 +8,7 @@ export default defineConfig({
     uni(),
     AutoImport({
       imports: ['vue', 'uni-app'],
-      dirs: ['src/utils', 'src/wxs/**'],
+      dirs: ['src/utils'],
       dts: 'src/auto-imports.d.ts'
     }),
   ],
@@ -17,5 +17,10 @@ export default defineConfig({
     port: 80,
     open: true
   },
-  base: './',
+  // resolve: {
+  //   alias: {
+  //     '@': path.resolve(__dirname, 'src')
+  //   }
+  // },
+  // base: './',
 })

@@ -5,7 +5,7 @@
             <view class="search-box">
                 <input placeholder="输入关键字搜索" class="sear-input" confirm-type="search" :value="prodName"
                     @confirm="toSearchProdPage" @input="getSearchContent">
-                <!-- <image src="@/static/images/icon/search.png" class="search-img" /> -->
+                <image src="../../static/images/icon/search.png" class="search-img" />
             </view>
             <text class="search-hint" @tap="goBackIndex">
                 取消
@@ -35,7 +35,7 @@
                 <view class="title-text history-line">
                     搜索历史
                     <view class="clear-history">
-                        <!-- <image src="@/static/images/icon/clear-his.png" @tap="clearSearch" /> -->
+                        <image src="../../static/images/icon/clear-his.png" @tap="clearSearch" />
                     </view>
                 </view>
                 <block v-for="(item, index) in recentSearch" :key="index">

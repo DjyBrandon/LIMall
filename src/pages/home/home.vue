@@ -37,7 +37,7 @@
     <TnNoticeBar @click="onNewsPage" bg-color="#fff" text-color="#000" font-size="28" :data="news" left-icon="sound"
         left-icon-color="tn-grey" right-icon="right" right-icon-color="right" direction="vertical" auto-hidden />
 
-    <view v-if="updata">
+    <view v-if="updata" class="update">
         <block v-for="(item, index) in taglist" :key="index">
             <!-- 每日上新 -->
             <view v-if="item.style === '2' && item.prods && item.prods.length" class="up-to-date">
@@ -62,8 +62,8 @@
                             </view>
                             <view class="price">
                                 <text class="symbol">¥</text>
-                                <!-- <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
-                                <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text> -->
+                                <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
+                                <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text>
                             </view>
                         </view>
                     </block>
@@ -99,12 +99,13 @@
                             <view class="prod-text-info">
                                 <view class="price">
                                     <text class="symbol">¥</text>
-                                    <!-- <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
-                                <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text> -->
+                                    <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
+                                    <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text>
                                 </view>
                             </view>
                             <TnIcon name="cart-fill" size="30rpx" />
-                            <!-- <image src="@/static/images/tabbar/basket-sel.png" class="basket-img" /> -->
+                            <image src="../../static/images/tabbar/basket-sel.png" style="height: 100rpx;width: 100rpx;"
+                                class="basket-img" />
                         </view>
                     </block>
                 </view>
@@ -131,12 +132,12 @@
                             <view class="b-cart">
                                 <view class="price">
                                     <text class="symbol">¥</text>
-                                    <!-- <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
-                                <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text> -->
+                                    <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
+                                    <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text>
                                 </view>
                                 <TnIcon name="cart" size="30rpx" @tap.stop="addToCart(prod)" />
-                                <!-- <image src="@/static/images/tabbar/basket-sel.png" class="basket-img"
-                                    @tap.stop="addToCart(prod)" /> -->
+                                <image src="../../static/images/tabbar/basket-sel.png" class="basket-img"
+                                    @tap.stop="addToCart(prod)" />
                             </view>
                         </view>
                     </block>

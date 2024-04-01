@@ -18,8 +18,8 @@
                     {{ prodName }}
                 </view>
                 <view class="col" @tap="addOrCannelCollection">
-                    <!-- <image v-if="!isCollection" src="@/static/images/icon/prod-col.png" />
-                    <image v-if="isCollection" src="@/static/images/icon/prod-col-red.png" /> -->
+                    <image v-if="!isCollection" src="../../static/images/icon/prod-col.png" />
+                    <image v-if="isCollection" src="../../static/images/icon/prod-col-red.png" />
                     收藏
                 </view>
             </view>
@@ -29,13 +29,13 @@
             <view class="prod-price">
                 <text v-if="defaultSku && defaultSku.price" class="price">
                     ￥
-                    <!-- <text class="price-num">
+                    <text class="price-num">
                         {{ wxs.parsePrice(defaultSku.price)[0] }}
                     </text>
-                    .{{ wxs.parsePrice(defaultSku.price)[1] }} -->
+                    .{{ wxs.parsePrice(defaultSku.price)[1] }}
                 </text>
                 <text v-if="defaultSku && defaultSku.oriPrice" class="ori-price">
-                    <!-- ￥{{ wxs.parsePrice(defaultSku.oriPrice)[0] }}.{{ wxs.parsePrice(defaultSku.oriPrice)[1] }} -->
+                    ￥{{ wxs.parsePrice(defaultSku.oriPrice)[0] }}.{{ wxs.parsePrice(defaultSku.oriPrice)[1] }}
                 </text>
                 <text class="sales" />
             </view>
@@ -113,11 +113,11 @@
         <!-- 底部按钮 -->
         <view class="cart-footer">
             <view class="btn icon" @tap="toHomePage">
-                <!-- <image src="@/static/images/tabbar/homepage.png" /> -->
+                <image src="../../static/images/tabbar/homepage.png" />
                 首页
             </view>
             <view class="btn icon" @tap="toCartPage">
-                <!-- <image src="@/static/images/tabbar/basket.png" /> -->
+                <image src="../../static/images/tabbar/basket.png" />
                 购物车
                 <view v-if="totalCartNum > 0" class="badge badge-1">
                     {{ totalCartNum }}
@@ -139,10 +139,10 @@
                     <image class="pup-sku-img" :src="defaultSku.pic ? defaultSku.pic : pic" />
                     <view class="pup-sku-price">
                         ￥
-                        <!-- <text v-if="defaultSku && defaultSku.price" class="pup-sku-price-int">
+                        <text v-if="defaultSku && defaultSku.price" class="pup-sku-price-int">
                             {{ wxs.parsePrice(defaultSku.price)[0] }}
                         </text>
-                        .{{ wxs.parsePrice(defaultSku.price)[1] }} -->
+                        .{{ wxs.parsePrice(defaultSku.price)[1] }}
                     </view>
                     <view class="pup-sku-prop">
                         <text>已选</text>
@@ -628,7 +628,7 @@ const unique = (arr) => {
  * 跳转到首页
  */
 const toHomePage = () => {
-    uni.switchTab({
+    uni.navigateTo({
         url: '/pages/index/index'
     })
 }
@@ -637,7 +637,7 @@ const toHomePage = () => {
  * 跳转到购物车
  */
 const toCartPage = () => {
-    uni.switchTab({
+    uni.navigateTo({
         url: '/pages/basket/basket'
     })
 }

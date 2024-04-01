@@ -3,7 +3,7 @@
         <!-- 头部搜索区 -->
         <view class="search-bar">
             <view class="search-box" @tap="toSearchPage">
-                <!-- <image src="@/static/images/icon/search.png" class="search-img" /> -->
+                <image src="../../static/images/icon/search.png" class="search-img" />
                 <text class="sear-input">
                     搜索您想要的商品
                 </text>

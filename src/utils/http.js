@@ -60,7 +60,7 @@ const http = {
                   } else {
                     const router = getCurrentPages()
                     if (router[0].route === 'pages/basket/basket') {
-                      uni.switchTab({
+                      uni.navigateTo({
                         url: '/pages/index/index'
                       })
                     }

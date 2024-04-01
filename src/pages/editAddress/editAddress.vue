@@ -46,7 +46,7 @@
                 </view>
 
                 <view class="arrow">
-                    <!-- <image src="@/static/images/icon/more.png" /> -->
+                    <image src="../../static/images/icon/more.png" />
                 </view>
             </view>
             <view class="section">

@@ -38,8 +38,8 @@
                             </text>
 
                             <view v-if="item.status == 5 || item.status == 6" class="clear-btn">
-                                <!-- <image src="@/static/images/icon/clear-his.png" class="clear-list-btn"
-                                :data-ordernum="item.orderNumber" @tap="delOrderList" /> -->
+                                <image src="../../static/images/icon/clear-his.png" class="clear-list-btn"
+                                    :data-ordernum="item.orderNumber" @tap="delOrderList" />
                             </view>
                         </view>
                     </view>
@@ -65,12 +65,12 @@
                                                 <text class="symbol">
                                                     ￥
                                                 </text>
-                                                <!-- <text class="big-num">
+                                                <text class="big-num">
                                                     {{ wxs.parsePrice(prod.price)[0] }}
                                                 </text>
                                                 <text class="small-num">
                                                     .{{ wxs.parsePrice(prod.price)[1] }}
-                                                </text> -->
+                                                </text>
                                             </text>
                                             <text class="prodcount">
                                                 x{{ prod.prodCount }}
@@ -103,12 +103,12 @@
                             <text class="symbol">
                                 ￥
                             </text>
-                            <!-- <text class="big-num">
+                            <text class="big-num">
                                 {{ wxs.parsePrice(item.actualTotal)[0] }}
                             </text>
                             <text class="small-num">
                                 .{{ wxs.parsePrice(item.actualTotal)[1] }}
-                            </text> -->
+                            </text>
                         </view>
                     </view>
                     <!-- end 商品列表 -->
@@ -146,7 +146,8 @@ const sts = ref(0)
 /**
  * 生命周期函数--监听页面加载
  */
-onMounted((options) => {
+onLoad((options) => {
+    console.log(options)
     if (options.sts) {
         sts.value = options.sts
         loadOrderData(options.sts, 1)

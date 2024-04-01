@@ -27,7 +27,7 @@ declare global {
   const login: typeof import('./utils/login.js')['default']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
-  const number: typeof import('./wxs/number.js')['default']
+  const number: typeof import('./utils/number.js')['default']
   const onActivated: typeof import('vue')['onActivated']
   const onAddToFavorites: typeof import('@dcloudio/uni-app')['onAddToFavorites']
   const onBackPress: typeof import('@dcloudio/uni-app')['onBackPress']

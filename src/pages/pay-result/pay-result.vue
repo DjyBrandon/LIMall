@@ -59,7 +59,7 @@ const toOrderList = () => {
     })
 }
 const toIndex = () => {
-    uni.switchTab({
+    uni.navigateBack({
         url: '/pages/index/index'
     })
 }

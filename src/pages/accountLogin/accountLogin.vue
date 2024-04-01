@@ -1,6 +1,6 @@
 <template>
     <view class="con">
-        <!-- <image src="@/static/logo.png" /> -->
+        <image src="../../static/logo.png" />
         <!-- 登录 -->
         <view class="login-form">
             <view :class="['item', errorTips == 1 ? 'error' : '']">
@@ -58,10 +58,10 @@ import { encrypt } from '@/utils/crypto.js'
 /**
  * 生命周期函数--监听页面显示
  */
-onShow(() => {
+onMounted(() => {
     // 头部导航标题
     uni.setNavigationBarTitle({
-        title: '用户登录'
+        title: '用户登录',
     })
 })
 
@@ -136,7 +136,7 @@ const toRegitser = () => {
  * 回到首页
  */
 const toIndex = () => {
-    wx.navigateTo({
+    uni.navigateBack({
         url: '/pages/index/index'
     })
 }

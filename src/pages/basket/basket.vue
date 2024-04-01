@@ -4,7 +4,7 @@
             <block v-for="(item, scIndex) in shopCartItemDiscounts" :key="scIndex">
                 <view class="prod-block">
                     <view v-if="item.chooseDiscountItemDto" class="discount-tips">
-                        <!-- <text class="text-block">
+                        <text class="text-block">
                             {{ wxs.parseDiscount(item.chooseDiscountItemDto.discountRule) }}
                         </text>
                         <text class="text-list">
@@ -12,7 +12,7 @@
                                 wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule,
                                     item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
                             }}
-                        </text> -->
+                        </text>
                     </view>
                     <block v-for="(prod, index) in item.shopCartItems" :key="index">
                         <view class="item">
@@ -38,12 +38,12 @@
                                             <text class="symbol">
                                                 ￥
                                             </text>
-                                            <!-- <text class="big-num">
+                                            <text class="big-num">
                                                 {{ wxs.parsePrice(prod.price)[0] }}
                                             </text>
                                             <text class="small-num">
                                                 .{{ wxs.parsePrice(prod.price)[1] }}
-                                            </text> -->
+                                            </text>
                                         </view>
                                         <view class="m-numSelector">
                                             <view class="minus" :data-scindex="scIndex" :data-index="index"
@@ -63,7 +63,7 @@
 
         <view v-if="!shopCartItemDiscounts.length" class="empty">
             <view class="img">
-                <!-- <image src="@/static/images/tabbar/basket.png" /> -->
+                <image src="../../static/images/tabbar/basket.png" />
             </view>
             <view class="txt">
                 您还没有添加任何商品哦~
@@ -86,16 +86,16 @@
                         <text class="symbol">
                             ￥
                         </text>
-                        <!-- <text class="big-num">
+                        <text class="big-num">
                             {{ wxs.parsePrice(finalMoney)[0] }}
                         </text>
                         <text class="small-num">
                             .{{ wxs.parsePrice(finalMoney)[1] }}
-                        </text> -->
+                        </text>
                     </view>
                 </view>
                 <view v-if="subtractMoney > 0" class="total-msg">
-                    <!-- 总额:￥{{ wxs.toPrice(totalMoney) }} 立减:￥{{ wxs.toPrice(subtractMoney) }} -->
+                    总额:￥{{ wxs.toPrice(totalMoney) }} 立减:￥{{ wxs.toPrice(subtractMoney) }}
                 </view>
             </view>
             <view class="btn settle" @tap="toFirmOrder">

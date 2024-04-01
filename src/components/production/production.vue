@@ -18,12 +18,12 @@
           <text class="symbol">
             ￥
           </text>
-          <!-- <text class="big-num">
+          <text class="big-num">
             {{ wxs.parsePrice(item.price)[0] }}
           </text>
           <text class="small-num">
             .{{ wxs.parsePrice(item.price)[1] }}
-          </text> -->
+          </text>
         </view>
       </view>
     </view>

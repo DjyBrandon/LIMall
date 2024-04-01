@@ -19,7 +19,7 @@
 
         <view v-if="!isAuthInfo" class="userinfo-none">
             <view class="default-pic" @tap="toLogin">
-                <!-- <image src="@/static/images/icon/head04.png" /> -->
+                <image src="../../static/images/icon/head04.png" />
             </view>
             <view class="none-login" @tap="toLogin">
                 <button class="unlogin">
@@ -46,28 +46,28 @@
                 </view>
                 <view class="procedure">
                     <view class="items" data-sts="1" @tap="toOrderListPage">
-                        <!-- <image src="@/static/images/icon/toPay.png" /> -->
+                        <image src="../../static/images/icon/toPay.png" />
                         <text>待支付</text>
                         <text v-if="orderAmount.unPay > 0" class="num-badge">
                             {{ orderAmount.unPay }}
                         </text>
                     </view>
                     <view class="items" data-sts="2" @tap="toOrderListPage">
-                        <!-- <image src="@/static/images/icon/toDelivery.png" /> -->
+                        <image src="../../static/images/icon/toDelivery.png" />
                         <text>待发货</text>
                         <text v-if="orderAmount.payed > 0" class="num-badge">
                             {{ orderAmount.payed }}
                         </text>
                     </view>
                     <view class="items" data-sts="3" @tap="toOrderListPage">
-                        <!-- <image src="@/static/images/icon/toTake.png" /> -->
+                        <image src="../../static/images/icon/toTake.png" />
                         <text>待收货</text>
                         <text v-if="orderAmount.consignment > 0" class="num-badge">
                             {{ orderAmount.consignment }}
                         </text>
                     </view>
                     <view class="items" data-sts="5" @tap="toOrderListPage">
-                        <!-- <image src="@/static/images/icon/toComment.png" /> -->
+                        <image src="../../static/images/icon/toComment.png" />
                         <text>已完成</text>
                     </view>
                 </view>
@@ -113,28 +113,28 @@
             <view class="my-menu">
                 <view class="memu-item" @tap="toDistCenter">
                     <view class="i-name">
-                        <!-- <image src="@/static/images/icon/promotion.png" /> -->
+                        <image src="../../static/images/icon/promotion.png" />
                         <text>分销中心</text>
                     </view>
                     <view class="arrowhead" />
                 </view>
                 <view class="memu-item" @tap="toCouponCenter">
                     <view class="i-name">
-                        <!-- <image src="@/static/images/icon/getCoupon.png" /> -->
+                        <image src="../../static/images/icon/getCoupon.png" />
                         <text>领券中心</text>
                     </view>
                     <view class="arrowhead" />
                 </view>
                 <view class="memu-item" @tap="toMyCouponPage">
                     <view class="i-name">
-                        <!-- <image src="@/static/images/icon/myCoupon.png" /> -->
+                        <image src="../../static/images/icon/myCoupon.png" />
                         <text>我的优惠券</text>
                     </view>
                     <view class="arrowhead" />
                 </view>
                 <view class="memu-item" @tap="toAddressList">
                     <view class="i-name">
-                        <!-- <image src="@/static/images/icon/myAddr.png" /> -->
+                        <image src="../../static/images/icon/myAddr.png" />
                         <text>收货地址</text>
                     </view>
                     <view class="arrowhead" />
@@ -275,7 +275,7 @@ const logout = () => {
             })
             orderAmount.value = ''
             setTimeout(() => {
-                uni.switchTab({
+                uni.navigateBack({
                     url: '/pages/index/index'
                 })
             }, 1000)

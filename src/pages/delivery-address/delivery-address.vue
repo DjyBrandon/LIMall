@@ -20,8 +20,8 @@
                                 <text class="tel">
                                     {{ item.mobile }}
                                 </text>
-                                <!-- <image src="@/static/images/icon/revise.png" :data-addrid="item.addrId"
-                                    @tap.stop="toEditAddress" /> -->
+                                <image src="../../static/images/icon/revise.png" :data-addrid="item.addrId"
+                                    @tap.stop="toEditAddress" />
                             </view>
                             <view class="addr">
                                 <text class="addr-get">

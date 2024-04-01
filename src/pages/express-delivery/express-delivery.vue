@@ -29,8 +29,8 @@
                 <block v-for="(item, index) in dvyData" :key="index">
                     <view :class="'detailItem ' + (index == 0 ? 'lastest' : '')">
                         <view class="dot">
-                            <!-- <image src="@/static/images/icon/delive-dot.png" /> -->
-                            <!-- <image src="@/static/images/icon/dot.png" /> -->
+                            <image src="../../static/images/icon/delive-dot.png" />
+                            <image src="../../static/images/icon/dot.png" />
                         </view>
                         <view class="detail">
                             <view class="desc">
