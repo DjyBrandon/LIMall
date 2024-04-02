@@ -266,7 +266,6 @@ const logout = () => {
         method: 'post'
     })
         .then(() => {
-            // util.removeTabBadge()
             uni.removeStorageSync('loginResult')
             uni.removeStorageSync('token')
             uni.showToast({

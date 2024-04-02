@@ -30,14 +30,6 @@ const util = {
   },
 
   /**
-   * 移除购物车Tabbar的数字
-   */
-  removeTabBadge: () => {
-    uni.removeTabBarBadge({
-      index: 3
-    })
-  },
-  /**
    * 获取链接上的参数
    */
   getUrlKey: (name) => {

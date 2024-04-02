@@ -109,10 +109,6 @@ const http = {
   },
   getCartCount: () => {
     return new Promise((resolve) => {
-      if (!uni.getStorageSync('Token')) {
-        // util.removeTabBadge()
-        return
-      }
       http.request({
         url: '/p/shopCart/prodCount',
         method: 'GET',
