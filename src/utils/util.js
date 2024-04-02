@@ -36,6 +36,7 @@ const util = {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || ['', ''])[1]
       .replace(/\+/g, '%20')) || null
   },
+
   /**
    * 文件地址校验
    * @param fileUrl 获取到的文件路径

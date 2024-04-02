@@ -107,6 +107,7 @@ const http = {
       })
     })
   },
+
   getCartCount: () => {
     return new Promise((resolve) => {
       http.request({
@@ -127,12 +128,14 @@ const http = {
     })
 
   },
+
   onRequestFail: (params, responseData) => {
     console.error('============== 请求异常 ==============')
     console.log('接口地址: ', params.url)
     console.log('异常信息: ', responseData)
     console.error('============== 请求异常 end ==========')
   },
+
   /**
    * 登录成功后执行
    * @param {Object} result  登录成功返回的数据
@@ -153,4 +156,5 @@ const http = {
     }
   }
 }
+
 export default http

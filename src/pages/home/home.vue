@@ -43,10 +43,10 @@
             <view v-for="(item, index) in taglist" :key="index">
                 <!-- 每日上新 -->
                 <view v-if="item.style === '2' && item.prods && item.prods.length">
-                    <view>
-                        <view>{{ item.title }}</view>
+                    <view class="tn-flex justify-between">
+                        <view class="tn-ml-sm tn-text-bold tn-text-xl tn-orangered_text">{{ item.title }}</view>
                         <view data-sts="0" :data-id="item.id" :data-title="item.title" @tap="toClassifyPage">
-                            <view>查看更多</view>
+                            <view class="tn-mr-xs">查看更多</view>
                         </view>
                     </view>
                     <view class="tn-flex-wrap">
@@ -54,7 +54,7 @@
                             <template #left="{ item }">
                                 <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
                                     <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view>{{ item.prodName }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
                                     <view>
                                         <text>¥</text>
                                         <text>{{ wxs.parsePrice(item.price)[0] }}</text>
@@ -65,7 +65,7 @@
                             <template #right="{ item }">
                                 <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
                                     <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view>{{ item.prodName }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
                                     <view>
                                         <text>¥</text>
                                         <text>{{ wxs.parsePrice(item.price)[0] }}</text>
@@ -89,8 +89,8 @@
                             <template #left="{ item }">
                                 <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
                                     <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view>{{ item.prodName }}</view>
-                                    <view>{{ item.brief }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
                                     <view>
                                         <text>¥</text>
                                         <text>{{ wxs.parsePrice(item.price)[0] }}</text>
@@ -102,8 +102,8 @@
                             <template #right="{ item }">
                                 <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
                                     <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view>{{ item.prodName }}</view>
-                                    <view>{{ item.brief }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
                                     <view>
                                         <text>¥</text>
                                         <text>{{ wxs.parsePrice(item.price)[0] }}</text>
@@ -125,8 +125,8 @@
                             <template #left="{ item }">
                                 <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
                                     <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view>{{ item.prodName }}</view>
-                                    <view>{{ item.brief }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
                                     <view>
                                         <text>¥</text>
                                         <text>{{ wxs.parsePrice(item.price)[0] }}</text>
@@ -138,8 +138,8 @@
                             <template #right="{ item }">
                                 <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
                                     <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view>{{ item.prodName }}</view>
-                                    <view>{{ item.brief }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
+                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
                                     <view>
                                         <text>¥</text>
                                         <text>{{ wxs.parsePrice(item.price)[0] }}</text>
@@ -188,7 +188,9 @@ type Taglist = {
 const taglist = ref<Array<Taglist>>([])
 
 onShow(() => {
+    // #ifdef MP-WEIXIN
     uni.hideHomeButton()
+    // #endif
 })
 
 onMounted(() => {

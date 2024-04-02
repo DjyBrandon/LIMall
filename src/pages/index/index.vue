@@ -37,7 +37,9 @@ const tabbarData = ref([
 ])
 
 onShow(() => {
-  uni.hideHomeButton()
+  // #ifdef MP-WEIXIN
+  // uni.hideHomeButton()
+  // #endif
   http.getCartCount().then(res => {
     tabbarData.value[2].badge = res
   })
