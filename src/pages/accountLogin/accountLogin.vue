@@ -65,7 +65,7 @@ onMounted(() => {
     })
 })
 
-const principal = ref('') // 账号
+const principal = ref('brandon') // 账号
 const errorTips = ref(0) // 错误提示
 watch(
     () => principal.value,
@@ -74,7 +74,7 @@ watch(
     }
 )
 
-const credentials = ref('') // 密码
+const credentials = ref('123456') // 密码
 /**
  * 输入框的值
  */
@@ -112,7 +112,7 @@ const login = () => {
                         icon: 'none',
                         complete: () => {
                             setTimeout(() => {
-                                wx.navigateTo({
+                                uni.reLaunch({
                                     url: '/pages/index/index'
                                 })
                             }, 1000)
@@ -136,7 +136,7 @@ const toRegitser = () => {
  * 回到首页
  */
 const toIndex = () => {
-    uni.navigateBack({
+    uni.reLaunch({
         url: '/pages/index/index'
     })
 }

@@ -266,7 +266,7 @@ const logout = () => {
         method: 'post'
     })
         .then(() => {
-            util.removeTabBadge()
+            // util.removeTabBadge()
             uni.removeStorageSync('loginResult')
             uni.removeStorageSync('token')
             uni.showToast({
@@ -275,7 +275,7 @@ const logout = () => {
             })
             orderAmount.value = ''
             setTimeout(() => {
-                uni.navigateBack({
+                uni.reLaunch({
                     url: '/pages/index/index'
                 })
             }, 1000)

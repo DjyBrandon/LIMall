@@ -1,4 +1,5 @@
 <template>
+    <TnListItem radius> 联系客服 </TnListItem>
     <view class="container">
         <view class="recent-news">
             <block v-for="(item, index) in news" :key="index">
@@ -19,6 +20,9 @@
 </template>
   
 <script setup lang="ts">
+
+import TnListItem from '@tuniao/tnui-vue3-uniapp/components/list/src/list-item.vue'
+
 type News = {
     id: number,
     title: string,

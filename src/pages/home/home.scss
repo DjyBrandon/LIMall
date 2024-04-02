@@ -16,10 +16,26 @@
     }
 }
 
-.title {
-    margin-top: 10rpx;
+// 功能图标
+.fun-img {
+    width: 18vw;
+    height: auto;
 }
 
+// 商品列表
+.image-data {
+    width: calc(100% - 20rpx);
+    margin: 10rpx;
+    border-radius: 10rpx;
+    box-shadow: 0rpx 6rpx 8rpx rgba(58, 134, 185, 0.2);
+    overflow: hidden;
+
+    .image {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+    }
+}
 
 /* 每日上新 */
 .title {

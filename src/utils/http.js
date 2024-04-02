@@ -108,30 +108,28 @@ const http = {
     })
   },
   getCartCount: () => {
-    if (!uni.getStorageSync('Token')) {
-      util.removeTabBadge()
-      return
-    }
-    http.request({
-      url: '/p/shopCart/prodCount',
-      method: 'GET',
-      dontTrunLogin: true,
-      data: {}
-    })
-      .then(({ data }) => {
-        if (data > 0) {
-          uni.setTabBarBadge({
-            index: 2,
-            text: data + ''
-          })
-          getApp().globalData.totalCartCount = data
-        } else {
-          uni.removeTabBarBadge({
-            index: 2
-          })
-          getApp().globalData.totalCartCount = 0
-        }
+    return new Promise((resolve) => {
+      if (!uni.getStorageSync('Token')) {
+        // util.removeTabBadge()
+        return
+      }
+      http.request({
+        url: '/p/shopCart/prodCount',
+        method: 'GET',
+        dontTrunLogin: true,
+        data: {}
       })
+        .then(({ data }) => {
+          if (data > 0) {
+            getApp().globalData.totalCartCount = data
+            resolve(data)
+          } else {
+            getApp().globalData.totalCartCount = 0
+            resolve(0)
+          }
+        })
+    })
+
   },
   onRequestFail: (params, responseData) => {
     console.error('============== 请求异常 ==============')

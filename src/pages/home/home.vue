@@ -1,149 +1,158 @@
 <template>
-    <!-- 搜索栏 + 轮播图 -->
-    <view class="tn-pl-sm tn-pr-sm">
-        <TnSearchBox shape="round" size="sm" placeholder="请输入搜索关键词" @search="toSearchPage" />
-        <view class="swiper-container tn-mt-sm">
-            <TnSwiper :data="indexImgs" width="100%" height="300" indicator indicator-type="dot">
-                <template #default="{ data }">
-                    <view class="swiper-data">
-                        <image class="image" :src="data.imgUrl" :data-prodid="data.relation" @tap="toProdPage"
-                            mode="aspectFill" />
-                    </view>
-                </template>
-            </TnSwiper>
+    <view class="tn-gray-light_bg">
+        <!-- 搜索栏 + 轮播图 -->
+        <view class="tn-pl-sm tn-pr-sm">
+            <TnSearchBox shape="round" border-color="tn-blue" placeholder-color="＃696969" size="sm" placeholder="请输入搜索关键词"
+                @search="toSearchPage" />
+            <view class="swiper-container tn-mt-sm tn-mb-xs">
+                <TnSwiper :data="indexImgs" width="100%" height="300" indicator indicator-type="dot">
+                    <template #default="{ data }">
+                        <view class="swiper-data">
+                            <image class="image" :src="data.imgUrl" :data-prodid="data.relation" @tap="toProdPage"
+                                mode="aspectFill" />
+                        </view>
+                    </template>
+                </TnSwiper>
+            </view>
         </view>
-    </view>
-    <!-- 功能栏 -->
-    <view class="tn-m tn-flex justify-evenly">
-        <view class="tn-flex-column" data-sts="1" @tap="toClassifyPage">
-            <TnIcon name="tips-fill" type="primary" size="75rpx" />
-            <view class="title">新品推荐</view>
+        <!-- 功能栏 -->
+        <view class="tn-ml-sm tn-mr-sm tn-pt-sm tn-pb-sm tn-pl-xs tn-pr-xs tn-radius tn-flex justify-evenly items-center"
+            style="background-color: #fff;">
+            <view class="tn-flex-column" data-sts="1" @tap="toClassifyPage">
+                <image src="/static/images/function/new.svg" mode="widthFix" class="fun-img" />
+            </view>
+            <view class="tn-flex-column" data-sts="2" @tap="toClassifyPage">
+                <image src="/static/images/function/bargin.svg" mode="widthFix" class="fun-img" />
+            </view>
+            <view class="tn-flex-column" data-sts="3" @tap="toClassifyPage">
+                <image src="/static/images/function/today.svg" mode="widthFix" class="fun-img" />
+            </view>
+            <view class="tn-flex-column" @tap="toCouponCenter">
+                <image src="/static/images/function/coupon.svg" mode="widthFix" class="fun-img" />
+            </view>
         </view>
-        <view class="tn-flex-column" data-sts="2" @tap="toClassifyPage">
-            <TnIcon name="time-fill" size="75rpx" />
-            <view class="title">限时特惠</view>
-        </view>
-        <view class="tn-flex-column" data-sts="3" @tap="toClassifyPage">
-            <TnIcon name="fire-fill" size="75rpx" />
-            <view class="title">每日疯抢</view>
-        </view>
-        <view class="tn-flex-column" @tap="toCouponCenter">
-            <TnIcon name="coupon-fill" size="75rpx" />
-            <view class="title">领优惠券</view>
-        </view>
-    </view>
 
-    <!-- 消息播放 -->
-    <TnNoticeBar @click="onNewsPage" bg-color="#fff" text-color="#000" font-size="28" :data="news" left-icon="sound"
-        left-icon-color="tn-grey" right-icon="right" right-icon-color="right" direction="vertical" auto-hidden />
+        <!-- 消息播放 -->
+        <view class="tn-red_bg tn-m-sm">
+            <TnNoticeBar @click="onNewsPage" bg-color="#fff" text-color="#000" font-size="24" :data="news" left-icon="sound"
+                left-icon-color="tn-grey" right-icon="right" right-icon-color="right" direction="vertical" auto-hidden />
+        </view>
 
-    <view v-if="updata" class="update">
-        <block v-for="(item, index) in taglist" :key="index">
-            <!-- 每日上新 -->
-            <view v-if="item.style === '2' && item.prods && item.prods.length" class="up-to-date">
-                <view class="title">
-                    <view>{{ item.title }}</view>
-                    <view class="more-prod-cont" data-sts="0" :data-id="item.id" :data-title="item.title"
-                        @tap="toClassifyPage">
-                        <text class="more">
-                            查看更多
-                        </text>
+        <!-- 商品展示 -->
+        <view v-if="updata">
+            <view v-for="(item, index) in taglist" :key="index">
+                <!-- 每日上新 -->
+                <view v-if="item.style === '2' && item.prods && item.prods.length">
+                    <view>
+                        <view>{{ item.title }}</view>
+                        <view data-sts="0" :data-id="item.id" :data-title="item.title" @tap="toClassifyPage">
+                            <view>查看更多</view>
+                        </view>
+                    </view>
+                    <view class="tn-flex-wrap">
+                        <TnWaterFall :data="item.prods">
+                            <template #left="{ item }">
+                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
+                                    <image class="image" :src="item.pic" mode="widthFix" />
+                                    <view>{{ item.prodName }}</view>
+                                    <view>
+                                        <text>¥</text>
+                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    </view>
+                                </view>
+                            </template>
+                            <template #right="{ item }">
+                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
+                                    <image class="image" :src="item.pic" mode="widthFix" />
+                                    <view>{{ item.prodName }}</view>
+                                    <view>
+                                        <text>¥</text>
+                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    </view>
+                                </view>
+                            </template>
+                        </TnWaterFall>
                     </view>
                 </view>
-                <view class="content">
-                    <block v-for="(prod, index2) in item.prods" :key="index2">
-                        <view class="prod-item" :data-prodid="prod.prodId" @tap="toProdPage">
-                            <view class="imagecont">
-                                <image :src="prod.pic" style="height: 100rpx; width: 100rpx;"></image>
-                                <!-- <img-show :src="prod.pic" :class-list="['prodimg']" /> -->
-                            </view>
-                            <view class="prod-text">
-                                {{ prod.prodName }}
-                            </view>
-                            <view class="price">
-                                <text class="symbol">¥</text>
-                                <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
-                                <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text>
-                            </view>
+                <!-- 商城热卖 -->
+                <view v-if="item.style === '1' && item.prods && item.prods.length">
+                    <view>
+                        <view>{{ item.title }}</view>
+                        <view data-sts="0" :data-id="item.id" :data-title="item.title" @tap="toClassifyPage">
+                            <view>更多</view>
                         </view>
-                    </block>
-                </view>
-            </view>
-            <!-- 商城热卖 -->
-            <view v-if="item.style === '1' && item.prods && item.prods.length" class="hot-sale">
-                <view class="title">
-                    <view>{{ item.title }}</view>
-                    <view class="more-prod-cont" data-sts="0" :data-id="item.id" :data-title="item.title"
-                        @tap="toClassifyPage">
-                        <text class="more">
-                            更多
-                        </text>
+                    </view>
+                    <view class="tn-flex-wrap">
+                        <TnWaterFall :data="item.prods">
+                            <template #left="{ item }">
+                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
+                                    <image class="image" :src="item.pic" mode="widthFix" />
+                                    <view>{{ item.prodName }}</view>
+                                    <view>{{ item.brief }}</view>
+                                    <view>
+                                        <text>¥</text>
+                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    </view>
+                                    <TnIcon name="cart-fill" size="30rpx" />
+                                </view>
+                            </template>
+                            <template #right="{ item }">
+                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
+                                    <image class="image" :src="item.pic" mode="widthFix" />
+                                    <view>{{ item.prodName }}</view>
+                                    <view>{{ item.brief }}</view>
+                                    <view>
+                                        <text>¥</text>
+                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    </view>
+                                    <TnIcon name="cart-fill" size="30rpx" />
+                                </view>
+                            </template>
+                        </TnWaterFall>
                     </view>
                 </view>
-                <view class="hotsale-item-cont">
-                    <block v-for="(prod, index2) in item.prods" :key="index2">
-                        <view class="prod-items" :data-prodid="prod.prodId" @tap="toProdPage">
-                            <view class="hot-imagecont">
-                                <image :src="prod.pic" style="height: 100rpx; width: 100rpx;"></image>
-                                <!-- <img-show :src="prod.pic" :class-list="['prodimg']" /> -->
-                            </view>
-                            <view class="hot-text">
-                                {{ prod.prodName }}
-                            </view>
-                            <view class="hotprod-text">
-                                {{ prod.prodName }}
-                            </view>
-                            <view class="prod-info">
-                                {{ prod.brief }}
-                            </view>
-                            <view class="prod-text-info">
-                                <view class="price">
-                                    <text class="symbol">¥</text>
-                                    <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
-                                    <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text>
+                <!-- 更多宝贝 -->
+                <view v-if="item.style === '0' && item.prods && item.prods.length">
+                    <view>
+                        <view>{{ item.title }}</view>
+                    </view>
+                    <view class="tn-flex-wrap">
+                        <TnWaterFall :data="item.prods">
+                            <template #left="{ item }">
+                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
+                                    <image class="image" :src="item.pic" mode="widthFix" />
+                                    <view>{{ item.prodName }}</view>
+                                    <view>{{ item.brief }}</view>
+                                    <view>
+                                        <text>¥</text>
+                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    </view>
+                                    <TnIcon name="cart" size="30rpx" @tap.stop="addToCart(item)" />
                                 </view>
-                            </view>
-                            <TnIcon name="cart-fill" size="30rpx" />
-                            <image src="../../static/images/tabbar/basket-sel.png" style="height: 100rpx;width: 100rpx;"
-                                class="basket-img" />
-                        </view>
-                    </block>
+                            </template>
+                            <template #right="{ item }">
+                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
+                                    <image class="image" :src="item.pic" mode="widthFix" />
+                                    <view>{{ item.prodName }}</view>
+                                    <view>{{ item.brief }}</view>
+                                    <view>
+                                        <text>¥</text>
+                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    </view>
+                                    <TnIcon name="cart" size="30rpx" @tap.stop="addToCart(item)" />
+                                </view>
+                            </template>
+                        </TnWaterFall>
+                    </view>
                 </view>
             </view>
-            <!-- 更多宝贝 -->
-            <view v-if="item.style === '0' && item.prods && item.prods.length" class="more-prod">
-                <view class="title">
-                    <view>{{ item.title }}</view>
-                </view>
-                <view class="prod-show">
-                    <block v-for="(prod, index2) in item.prods" :key="index2" class="prod-item" :data-prodid="prod.prodId"
-                        @tap="toProdPage">
-                        <view class="more-prod-pic">
-                            <image :src="prod.pic" style="height: 100rpx; width: 100rpx;"></image>
-                            <!-- <img-show :src="prod.pic" :class-list="['prodimg']" /> -->
-                        </view>
-                        <view class="prod-text-right">
-                            <view class="prod-text more">
-                                {{ prod.prodName }}
-                            </view>
-                            <view class="prod-info">
-                                {{ prod.brief }}
-                            </view>
-                            <view class="b-cart">
-                                <view class="price">
-                                    <text class="symbol">¥</text>
-                                    <text class="big-num">{{ wxs.parsePrice(prod.price)[0] }}</text>
-                                    <text class="small-num">.{{ wxs.parsePrice(prod.price)[1] }}</text>
-                                </view>
-                                <TnIcon name="cart" size="30rpx" @tap.stop="addToCart(prod)" />
-                                <image src="../../static/images/tabbar/basket-sel.png" class="basket-img"
-                                    @tap.stop="addToCart(prod)" />
-                            </view>
-                        </view>
-                    </block>
-                </view>
-            </view>
-        </block>
+        </view>
     </view>
 </template>
 
@@ -154,6 +163,7 @@ import TnSearchBox from '@tuniao/tnui-vue3-uniapp/components/search-box/src/sear
 import TnSwiper from '@tuniao/tnui-vue3-uniapp/components/swiper/src/swiper.vue'
 import TnNoticeBar from '@tuniao/tnui-vue3-uniapp/components/notice-bar/src/notice-bar.vue'
 import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue'
+import TnWaterFall from '@tuniao/tnui-vue3-uniapp/components/water-fall/src/water-fall.vue'
 
 const wxs = number()
 const indexImgs = ref([])
@@ -176,6 +186,10 @@ type Taglist = {
     }>
 }
 const taglist = ref<Array<Taglist>>([])
+
+onShow(() => {
+    uni.hideHomeButton()
+})
 
 onMounted(() => {
     getAllData()

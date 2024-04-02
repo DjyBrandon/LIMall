@@ -7,32 +7,41 @@ import Category from '../category/category.vue'
 import Basket from '../basket/basket.vue'
 import User from '../user/user.vue'
 
-const counter = ref(0)
-
 const currentIndex = ref(0)
 // 导航栏数据
-const tabbarData = [
+const tabbarData = ref([
   {
     name: '首页',
     icon: 'home',
     activeIcon: 'home-fill',
+    badge: ''
   },
   {
     name: '分类',
     icon: 'menu',
     activeIcon: 'menu-fill',
+    badge: ''
   },
   {
     name: '购物车',
     icon: 'cart',
     activeIcon: 'cart-fill',
+    badge: ''
   },
   {
     name: '我的',
     icon: 'my-circle',
     activeIcon: 'my-circle-fill',
+    badge: ''
   },
-]
+])
+
+onShow(() => {
+  uni.hideHomeButton()
+  http.getCartCount().then(res => {
+    tabbarData.value[2].badge = res
+  })
+})
 </script>
 
 <template>
@@ -51,7 +60,7 @@ const tabbarData = [
     </view>
     <TnTabbar v-model="currentIndex" fixed switch-animation>
       <TnTabbarItem v-for="(item, index) in tabbarData" :key="index" :icon="item.icon" :active-icon="item.activeIcon"
-        :text="item.name" />
+        :text="item.name" :badge="item.badge" />
     </TnTabbar>
   </view>
 </template>
