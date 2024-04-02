@@ -1,5 +1,5 @@
 <template>
-    <view class="tn-gray-light_bg">
+    <view style="background-color: #F8F7F8;">
         <!-- 搜索栏 + 轮播图 -->
         <view class="tn-pl-sm tn-pr-sm">
             <TnSearchBox shape="round" border-color="tn-blue" placeholder-color="＃696969" size="sm" placeholder="请输入搜索关键词"
@@ -186,12 +186,6 @@ type Taglist = {
     }>
 }
 const taglist = ref<Array<Taglist>>([])
-
-onShow(() => {
-    // #ifdef MP-WEIXIN
-    uni.hideHomeButton()
-    // #endif
-})
 
 onMounted(() => {
     getAllData()

@@ -1,6 +1,8 @@
 <template>
-    <TnListItem radius> 联系客服 </TnListItem>
-    <view class="container">
+    <view class="container tn-p-xs">
+        <TnListItem v-for="(item, index) in news" :key="index" right-icon="right" bottom-border radius>
+            <view>{{ item.title }}{{ item.publishTime }}</view>
+        </TnListItem>
         <view class="recent-news">
             <block v-for="(item, index) in news" :key="index">
                 <view class="news-item" :data-id="item.id" @tap="toNewsDetail">
