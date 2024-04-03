@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     height: 100%;
+    background-color: #000;
 }
 
 .main {
@@ -9,59 +10,7 @@
     display: flex;
     overflow: hidden;
     height: 100%;
-}
-
-.search-bar {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    color: #777;
-    background: #fff;
-    box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.07);
-    z-index: 3;
-    padding: 20rpx 0;
-
-    .arrow {
-        width: 20rpx;
-        height: 20rpx;
-        border-bottom: 2rpx solid #777;
-        border-left: 2rpx solid #777;
-        transform: rotate(45deg);
-        position: absolute;
-        left: 30rpx;
-        top: 41rpx;
-    }
-
-    .search-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 60rpx;
-        background: #f7f7f7;
-        z-index: 999;
-        width: 92%;
-        border-radius: 50rpx;
-        text-align: center;
-        margin: auto;
-
-        .search-img {
-            width: 32rpx;
-            height: 32rpx;
-            margin-right: 10rpx;
-        }
-    }
-
-    .search-hint {
-        font-size: 28rpx;
-        position: absolute;
-        right: 30rpx;
-        top: 32rpx;
-    }
-}
-
-.sear-input {
-    font-size: 28rpx;
+    background-color: #eb2444;
 }
 
 .leftmenu {

@@ -1,29 +1,31 @@
 <template>
-    <view class="container tn-p-xs">
-        <TnListItem v-for="(item, index) in news" :key="index" right-icon="right" bottom-border radius>
-            <view>{{ item.title }}{{ item.publishTime }}</view>
-        </TnListItem>
-        <view class="recent-news">
-            <block v-for="(item, index) in news" :key="index">
-                <view class="news-item" :data-id="item.id" @tap="toNewsDetail">
-                    <view class="news-item-title">
-                        {{ item.title }}
-                    </view>
-                    <view class="news-item-date">
-                        {{ item.publishTime }}
-                    </view>
+    <view class="container">
+        <view class="tn-m-xs" v-for="(item, index) in news" :key="index">
+            <TnListItem right-icon="right" bottom-border radius>
+
+                <view :data-id="item.id" @tap="toNewsDetail">
+                    <TnIcon name="notice-fill" class="tn-pr-xs" size="25" />{{ item.title }}
                 </view>
-            </block>
-            <view v-if="!news || !news.length" class="empty">
-                暂无数据
-            </view>
+            </TnListItem>
+            <view>{{ item.publishTime }}</view>
         </view>
+    </view>
+    <view v-if="!news || !news.length">
+        <TnEmpty mode="data">
+            <template #icon>
+                <image src="https://resource.tuniaokj.com/images/empty/alien/12.png"
+                    style="height: 100rpx; width: 100rpx;" />
+            </template>
+            <template #tips>暂无公告</template>
+        </TnEmpty>
     </view>
 </template>
   
 <script setup lang="ts">
 
 import TnListItem from '@tuniao/tnui-vue3-uniapp/components/list/src/list-item.vue'
+import TnEmpty from '@tuniao/tnui-vue3-uniapp/components/empty/src/empty.vue'
+import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue'
 
 type News = {
     id: number,

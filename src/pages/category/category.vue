@@ -1,13 +1,8 @@
 <template>
     <view class="container">
-        <!-- 头部搜索区 -->
-        <view class="search-bar">
-            <view class="search-box" @tap="toSearchPage">
-                <image src="../../static/images/icon/search.png" class="search-img" />
-                <text class="sear-input">
-                    搜索您想要的商品
-                </text>
-            </view>
+        <view class="tn-pl-sm tn-pr-sm">
+            <TnSearchBox shape="round" search-button="false" border-color="tn-blue" placeholder-color="＃696969" size="sm"
+                placeholder="请输入搜索关键词" @search="toSearchPage" />
         </view>
         <!-- 滚动内容区 -->
         <view class="main">
@@ -54,6 +49,8 @@
 </template>
   
 <script setup>
+import TnSearchBox from '@tuniao/tnui-vue3-uniapp/components/search-box/src/search-box.vue'
+
 const categoryList = ref([])
 const subCategoryList = ref([])
 const categoryImg = ref('')

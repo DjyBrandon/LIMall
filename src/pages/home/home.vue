@@ -39,14 +39,44 @@
         </view>
 
         <!-- 商品展示 -->
+        <TnSwitchTab v-model="currentTabIndex" :tabs="tabs">
+            <view v-for="(item, index) in taglist" :key="index">
+                <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
+                    v-if="item.style === 2 && item.prods && item.prods.length">{{ item.title }}</view>
+                <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
+                    v-if="item.style === 1 && item.prods && item.prods.length">{{ item.title }}</view>
+                <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
+                    v-if="item.style === 0 && item.prods && item.prods.length">{{ item.title }}</view>
+            </view>
+        </TnSwitchTab>
+
+
+        <TnScrollList class="tn-pt">
+            <view class="item-container">
+                <view v-for="i in 20" :key="i" class="scroll-item tn-flex-center tn-flex-column">
+                    <view class="empty tn-grey-light_bg" />
+                    <view class="title">商品分类</view>
+                </view>
+            </view>
+        </TnScrollList>
+
+        <!-- 商品展示 -->
         <view v-if="updata">
             <view v-for="(item, index) in taglist" :key="index">
                 <!-- 每日上新 -->
-                <view v-if="item.style === '2' && item.prods && item.prods.length">
-                    <view class="tn-flex justify-between">
-                        <view class="tn-ml-sm tn-text-bold tn-text-xl tn-orangered_text">{{ item.title }}</view>
-                        <view data-sts="0" :data-id="item.id" :data-title="item.title" @tap="toClassifyPage">
-                            <view class="tn-mr-xs">查看更多</view>
+                <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
+                    v-if="item.style === 2 && item.prods && item.prods.length">
+                    <view class="tn-mb tn-ml tn-flex-center-between">
+                        <view style="height: 5vh;">
+                            <image src="/static/images/function/daynew.svg" mode="heightFix" />
+                            <TnIcon name="text-new" color="tn-orangered" size="100" />
+                        </view>
+                        <!-- <view class="tn-ml-sm tn-text-bold tn-text-2xl tn-orangered_text">{{ item.title }}</view> -->
+                        <view class="tn-mt-xl tn-text-sm tn-gray_text" data-sts="0" :data-id="item.id"
+                            :data-title="item.title" @tap="toClassifyPage">
+                            <view class="tn-mr">查看更多
+                                <TnIcon name="right-circle-simple-fill" />
+                            </view>
                         </view>
                     </view>
                     <view class="tn-flex-wrap">
@@ -54,11 +84,11 @@
                             <template #left="{ item }">
                                 <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
                                     <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
-                                    <view>
-                                        <text>¥</text>
-                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
-                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    <view class="tn-m-xs tn-text-sm tn-text-ellipsis-1">{{ item.prodName }}</view>
+                                    <view class="tn-m-xs">
+                                        <text class="tn-text-lg tn-red_text tn-mr-xs">¥</text>
+                                        <text class="tn-red_text tn-text-xl">{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text class="tn-text-sm tn-red_text">.{{ wxs.parsePrice(item.price)[1] }}</text>
                                     </view>
                                 </view>
                             </template>
@@ -77,7 +107,7 @@
                     </view>
                 </view>
                 <!-- 商城热卖 -->
-                <view v-if="item.style === '1' && item.prods && item.prods.length">
+                <view v-if="item.style === 1 && item.prods && item.prods.length">
                     <view>
                         <view>{{ item.title }}</view>
                         <view data-sts="0" :data-id="item.id" :data-title="item.title" @tap="toClassifyPage">
@@ -116,7 +146,7 @@
                     </view>
                 </view>
                 <!-- 更多宝贝 -->
-                <view v-if="item.style === '0' && item.prods && item.prods.length">
+                <view v-if="item.style === 0 && item.prods && item.prods.length">
                     <view>
                         <view>{{ item.title }}</view>
                     </view>
@@ -153,6 +183,7 @@
                 </view>
             </view>
         </view>
+
     </view>
 </template>
 
@@ -162,8 +193,15 @@ import { ref } from 'vue'
 import TnSearchBox from '@tuniao/tnui-vue3-uniapp/components/search-box/src/search-box.vue'
 import TnSwiper from '@tuniao/tnui-vue3-uniapp/components/swiper/src/swiper.vue'
 import TnNoticeBar from '@tuniao/tnui-vue3-uniapp/components/notice-bar/src/notice-bar.vue'
+import TnScrollList from '@tuniao/tnui-vue3-uniapp/components/scroll-list/src/scroll-list.vue'
+import TnSwitchTab from '@tuniao/tnui-vue3-uniapp/components/switch-tab/src/switch-tab.vue'
 import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue'
 import TnWaterFall from '@tuniao/tnui-vue3-uniapp/components/water-fall/src/water-fall.vue'
+import TnTitle from '@tuniao/tnui-vue3-uniapp/components/title/src/title.vue'
+
+// 当前选中的标签索引
+const currentTabIndex = ref(0)
+const tabs = ref([])
 
 const wxs = number()
 const indexImgs = ref([])
@@ -175,7 +213,7 @@ type Taglist = {
     id: number,
     title: string,
     seq: string,
-    style: string,
+    style: number,
     prods: Array<{
         // 针对 TypeScript 只初始化了 prodId 属性
         pic: string,
@@ -352,10 +390,13 @@ const getTag = () => {
         .then(({
             data
         }) => {
+            console.log(data)
             taglist.value = data
+            tabs.value = data.map((item: { title: string }) => item.title)
             for (let i = 0; i < data.length; i++) {
                 updata.value = false
                 updata.value = true
+                data[i].style = Number(data[i].style)
                 getTagProd(data[i].id, i)
             }
         })
