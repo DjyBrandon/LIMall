@@ -55,6 +55,7 @@ const categoryList = ref([])
 const subCategoryList = ref([])
 const categoryImg = ref('')
 const parentId = ref('')
+
 /**
  * 生命周期函数--监听页面加载
  */
@@ -70,6 +71,7 @@ onMounted(() => {
         .then(({ data }) => {
             categoryImg.value = data[0].pic
             categoryList.value = data
+            console.log(categoryImg.value)
             console.log(categoryList.value)
             getProdList(data[0].categoryId)
             parentId.value = categoryList.value[0].categoryId

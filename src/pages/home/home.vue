@@ -39,18 +39,23 @@
         </view>
 
         <!-- 商品分类 -->
-        <TnScrollList class="tn-pt">
-            <view class="item-container">
-                <view v-for="i in 20" :key="i" class="scroll-item tn-flex-center tn-flex-column">
-                    <view class="empty tn-grey-light_bg" />
-                    <view class="title">商品分类</view>
+        <view class="tn-ml-xs tn-mr-xs tn-radius" style="background-color: #fff;">
+            <TnScrollList>
+                <view class="tn-pt item-container">
+                    <view v-for="(item, index) in categoryList" :key="index"
+                        class="scroll-item tn-flex-center tn-flex-column">
+                        <image :src="item.pic" mode="aspectFill" class="empty"></image>
+                        <view class="title">{{ item.categoryName }}</view>
+                    </view>
                 </view>
-            </view>
-        </TnScrollList>
+            </TnScrollList>
+        </view>
+
+
 
         <!-- 商品展示 -->
         <view v-if="updata">
-            <view v-for="(item, index) in taglist" :key="index">
+            <view v-for="(item, index) in tagList" :key="index">
 
                 <!-- 每行三列内容（每日上新） -->
                 <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
@@ -188,8 +193,17 @@ const indexImgs = ref([])
 const seq = ref(0)
 const news = ref([])
 const updata = ref(true)
+
+// 商品分类数据初始化
+type CategoryList = {
+    categoryId: number,
+    categoryName: string,
+    pic: string
+}
+const categoryList = ref<Array<CategoryList>>([])
+
 // 按标签分组读取数据初始化
-type Taglist = {
+type TagList = {
     id: number,
     title: string,
     seq: string,
@@ -203,7 +217,7 @@ type Taglist = {
         brief: string,
     }>
 }
-const taglist = ref<Array<Taglist>>([])
+const tagList = ref<Array<TagList>>([])
 
 onMounted(() => {
     getAllData()
@@ -221,8 +235,8 @@ onMounted(() => {
     http.getCartCount() // 重新计算购物车总数量
 })
 
+// 模拟加载
 onPullDownRefresh(() => {
-    // 模拟加载
     setTimeout(() => {
         getAllData()
         uni.stopPullDownRefresh() // 停止下拉刷新
@@ -234,6 +248,7 @@ const getAllData = () => {
     getIndexImgs()
     getNoticeList()
     getTag()
+    getCategory()
 }
 
 const toProdPage = (e: any) => {
@@ -317,6 +332,7 @@ const toClassifyPage = (e: any) => {
         url
     })
 }
+
 /**
  * 跳转公告列表页面
  */
@@ -343,8 +359,8 @@ const getIndexImgs = () => {
         })
 }
 
+// 加载公告
 const getNoticeList = () => {
-    // 加载公告
     http.request({
         url: '/shop/notice/topNoticeList',
         method: 'GET',
@@ -355,6 +371,27 @@ const getNoticeList = () => {
         }) => {
             news.value = data.map((item: { title: string }) => item.title)
             // news.value = data
+        })
+}
+
+// 加载分类
+const getCategory = () => {
+    http.request({
+        url: '/category/categoryInfo',
+        method: 'GET',
+        data: {
+            parentId: ''
+        }
+    })
+        .then(({ data }) => {
+            console.log(data)
+            categoryList.value = data.map((item: { categoryId: number, categoryName: string, pic: string }) => ({ categoryId: item.categoryId, categoryName: item.categoryName, pic: item.pic }))
+            console.log(categoryList.value)
+            // categoryImg.value = data[0].pic
+            // categoryList.value = data
+            // console.log(categoryList.value)
+            // getProdList(data[0].categoryId)
+            // parentId.value = categoryList.value[0].categoryId
         })
 }
 
@@ -371,7 +408,7 @@ const getTag = () => {
             data
         }) => {
             console.log(data)
-            taglist.value = data
+            tagList.value = data
             for (let i = 0; i < data.length; i++) {
                 updata.value = false
                 updata.value = true
@@ -395,12 +432,12 @@ const getTagProd = (id: number, index: number) => {
         }) => {
             updata.value = false
             updata.value = true
-            const taglistParam = taglist.value
+            const tagListParam = tagList.value
             // Object.assign(taglistParam[index], {
             //     prods: data.records,
             // });
-            taglistParam[index].prods = data.records
-            taglist.value = taglistParam
+            tagListParam[index].prods = data.records
+            tagList.value = tagListParam
         })
 }
 </script>
