@@ -59,11 +59,12 @@ const http = {
                     })
                   } else {
                     const router = getCurrentPages()
-                    if (router[0].route === 'pages/basket/basket') {
-                      uni.navigateTo({
-                        url: '/pages/index/index'
-                      })
-                    }
+                    console.log(router[0].route)
+                    // if (router[0].route === 'pages/basket/basket') {
+                    uni.reLaunch({
+                      url: '/pages/index/index'
+                    })
+                    // }
                   }
                 }
               })

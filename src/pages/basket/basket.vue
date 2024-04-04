@@ -250,6 +250,7 @@ const checkAllSelected = () => {
 const totalMoney = ref(0)
 const subtractMoney = ref(0)
 const finalMoney = ref(0)
+
 /**
  * 计算购物车总额
  */

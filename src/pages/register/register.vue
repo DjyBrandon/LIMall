@@ -92,7 +92,6 @@ const toRegister = () => {
         errorTips.value = 2
     } else {
         errorTips.value = 0
-
         uni.showLoading()
         http.request({
             url: '/user/register',

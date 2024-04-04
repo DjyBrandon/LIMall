@@ -38,19 +38,7 @@
                 left-icon-color="tn-grey" right-icon="right" right-icon-color="right" direction="vertical" auto-hidden />
         </view>
 
-        <!-- 商品展示 -->
-        <TnSwitchTab v-model="currentTabIndex" :tabs="tabs">
-            <view v-for="(item, index) in taglist" :key="index">
-                <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
-                    v-if="item.style === 2 && item.prods && item.prods.length">{{ item.title }}</view>
-                <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
-                    v-if="item.style === 1 && item.prods && item.prods.length">{{ item.title }}</view>
-                <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
-                    v-if="item.style === 0 && item.prods && item.prods.length">{{ item.title }}</view>
-            </view>
-        </TnSwitchTab>
-
-
+        <!-- 商品分类 -->
         <TnScrollList class="tn-pt">
             <view class="item-container">
                 <view v-for="i in 20" :key="i" class="scroll-item tn-flex-center tn-flex-column">
@@ -63,16 +51,14 @@
         <!-- 商品展示 -->
         <view v-if="updata">
             <view v-for="(item, index) in taglist" :key="index">
-                <!-- 每日上新 -->
+
+                <!-- 每行三列内容（每日上新） -->
                 <view class="tn-m-xs tn-border-none-bottom tn-radius tn-gray-light_border"
-                    v-if="item.style === 2 && item.prods && item.prods.length">
-                    <view class="tn-mb tn-ml tn-flex-center-between">
-                        <view style="height: 5vh;">
-                            <image src="/static/images/function/daynew.svg" mode="heightFix" />
-                            <TnIcon name="text-new" color="tn-orangered" size="100" />
-                        </view>
-                        <!-- <view class="tn-ml-sm tn-text-bold tn-text-2xl tn-orangered_text">{{ item.title }}</view> -->
-                        <view class="tn-mt-xl tn-text-sm tn-gray_text" data-sts="0" :data-id="item.id"
+                    v-if="item.style === '2' && item.prods && item.prods.length">
+                    <view class="tn-flex-center-between">
+                        <TnTitle class="tn-m-sm tn-text-bold" :title="item.title" size="50rpx" mode="vLine"
+                            color="tn-orangered" assist-color="tn-orangered" />
+                        <view class="tn-mt-sm tn-text-sm tn-gray_text" data-sts="0" :data-id="item.id"
                             :data-title="item.title" @tap="toClassifyPage">
                             <view class="tn-mr">查看更多
                                 <TnIcon name="right-circle-simple-fill" />
@@ -80,105 +66,104 @@
                         </view>
                     </view>
                     <view class="tn-flex-wrap">
-                        <TnWaterFall :data="item.prods">
-                            <template #left="{ item }">
-                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
-                                    <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view class="tn-m-xs tn-text-sm tn-text-ellipsis-1">{{ item.prodName }}</view>
+                        <view class="tn-p-xs tn-w-1-3" v-for="(prod, index) in item.prods" :key="index">
+                            <view class="tn-radius tn-shadow tn-h-full" style="background-color: white; overflow: hidden;">
+                                <image :src="prod.pic" mode="aspectFill"
+                                    style="border-radius: 0; width: 100%; height: 223rpx" />
+                                <view class="tn-h-full">
+                                    <view class="tn-m-xs tn-text-lg tn-text-ellipsis-2">{{ prod.prodName }}</view>
                                     <view class="tn-m-xs">
+                                        <text class="tn-text-lg tn-red_text tn-mr-xs">¥</text>
+                                        <text class="tn-red_text tn-text-xl">{{
+                                            wxs.parsePrice(prod.price)[0] }}</text>
+                                        <text class="tn-text-sm tn-red_text">.{{
+                                            wxs.parsePrice(prod.price)[1] }}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 每行两列内容（商城热卖） -->
+                <view v-if="item.style === '1' && item.prods && item.prods.length">
+                    <view class="tn-flex-center-between">
+                        <TnTitle class="tn-m-sm tn-text-bold" :title="item.title" size="50rpx" mode="vLine"
+                            color="tn-orangered" assist-color="tn-orangered" />
+                        <view class="tn-mt-sm tn-text-sm tn-gray_text" data-sts="0" :data-id="item.id"
+                            :data-title="item.title" @tap="toClassifyPage">
+                            <view class="tn-mr">更多
+                                <TnIcon name="right-circle-simple-fill" />
+                            </view>
+                        </view>
+                    </view>
+                    <TnWaterFall :data="item.prods" mode="calc">
+                        <template #left="{ item }">
+                            <view class="image-data tn-shadow" :data-prodid="item.prodId" @click="toProdPage">
+                                <image class="image" :src="item.pic" mode="widthFix" />
+                                <view class="tn-m-xs tn-text-lg tn-text-ellipsis-1">{{ item.prodName }}</view>
+                                <view class="tn-m-xs tn-text-sm tn-gray_text tn-text-ellipsis-1">{{ item.brief }}</view>
+                                <view class="tn-flex justify-between">
+                                    <view class="tn-ml-sm tn-mb-xs">
                                         <text class="tn-text-lg tn-red_text tn-mr-xs">¥</text>
                                         <text class="tn-red_text tn-text-xl">{{ wxs.parsePrice(item.price)[0] }}</text>
                                         <text class="tn-text-sm tn-red_text">.{{ wxs.parsePrice(item.price)[1] }}</text>
                                     </view>
-                                </view>
-                            </template>
-                            <template #right="{ item }">
-                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
-                                    <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
-                                    <view>
-                                        <text>¥</text>
-                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
-                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    <view class="tn-mr-sm">
+                                        <TnIcon name="cart-fill" size="40" color="tn-blue-dark" />
                                     </view>
                                 </view>
-                            </template>
-                        </TnWaterFall>
-                    </view>
+                            </view>
+                        </template>
+                        <template #right="{ item }">
+                            <view class="image-data tn-shadow" :data-prodid="item.prodId" @click="toProdPage">
+                                <image class="image" :src="item.pic" mode="widthFix" />
+                                <view class="tn-m-xs tn-text-lg tn-text-ellipsis-1">{{ item.prodName }}</view>
+                                <view class="tn-m-xs tn-text-sm tn-gray_text tn-text-ellipsis-1">{{ item.brief }}</view>
+                                <view class="tn-flex justify-between">
+                                    <view class="tn-ml-sm tn-mb-xs">
+                                        <text class="tn-text-lg tn-red_text tn-mr-xs">¥</text>
+                                        <text class="tn-red_text tn-text-xl">{{ wxs.parsePrice(item.price)[0] }}</text>
+                                        <text class="tn-text-sm tn-red_text">.{{ wxs.parsePrice(item.price)[1] }}</text>
+                                    </view>
+                                    <view class="tn-mr-lg">
+                                        <TnIcon name="cart-fill" size="40" color="tn-blue-dark" />
+                                    </view>
+                                </view>
+                            </view>
+                        </template>
+                    </TnWaterFall>
                 </view>
-                <!-- 商城热卖 -->
-                <view v-if="item.style === 1 && item.prods && item.prods.length">
-                    <view>
-                        <view>{{ item.title }}</view>
-                        <view data-sts="0" :data-id="item.id" :data-title="item.title" @tap="toClassifyPage">
-                            <view>更多</view>
+
+                <!-- 每行一列内容（更多宝贝） -->
+                <view v-if="item.style === '0' && item.prods && item.prods.length">
+                    <view class="tn-flex-center-between">
+                        <TnTitle class="tn-m-sm tn-text-bold" :title="item.title" size="50rpx" mode="hLine"
+                            color="tn-orangered" assist-color="tn-orangered" />
+                    </view>
+                    <view class="tn-flex-wrap">
+                        <view class="tn-p-xs tn-w-full" v-for="(prod, index) in item.prods" :key="index">
+                            <view class="tn-flex tn-radius tn-shadow" style="background-color: white;">
+                                <view class="tn-m-xs tn-radius">
+                                    <image :src="prod.pic" mode="aspectFill" style="width: 223rpx; height: 223rpx" />
+                                </view>
+                                <view class="tn-w-full">
+                                    <view class="tn-m-xs tn-text-lg tn-text-ellipsis-2">{{ prod.prodName }}</view>
+                                    <view class="tn-m-xs tn-text-sm tn-gray_text tn-text-ellipsis-1">{{ prod.brief }}</view>
+                                    <view class="tn-mt-sm tn-flex justify-between">
+                                        <view class="tn-m-xs">
+                                            <text class="tn-text-xl tn-red_text tn-mr-xs">¥</text>
+                                            <text class="tn-red_text tn-text-2xl">{{ wxs.parsePrice(prod.price)[0] }}</text>
+                                            <text class="tn-text-lg tn-red_text">.{{ wxs.parsePrice(prod.price)[1] }}</text>
+                                        </view>
+                                        <view class="tn-mt-xs tn-mr-lg">
+                                            <TnIcon name="cart-fill" size="40" color="tn-blue-dark"
+                                                @tap.stop="addToCart(item)" />
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
                         </view>
-                    </view>
-                    <view class="tn-flex-wrap">
-                        <TnWaterFall :data="item.prods">
-                            <template #left="{ item }">
-                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
-                                    <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
-                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
-                                    <view>
-                                        <text>¥</text>
-                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
-                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
-                                    </view>
-                                    <TnIcon name="cart-fill" size="30rpx" />
-                                </view>
-                            </template>
-                            <template #right="{ item }">
-                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
-                                    <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
-                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
-                                    <view>
-                                        <text>¥</text>
-                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
-                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
-                                    </view>
-                                    <TnIcon name="cart-fill" size="30rpx" />
-                                </view>
-                            </template>
-                        </TnWaterFall>
-                    </view>
-                </view>
-                <!-- 更多宝贝 -->
-                <view v-if="item.style === 0 && item.prods && item.prods.length">
-                    <view>
-                        <view>{{ item.title }}</view>
-                    </view>
-                    <view class="tn-flex-wrap">
-                        <TnWaterFall :data="item.prods">
-                            <template #left="{ item }">
-                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
-                                    <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
-                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
-                                    <view>
-                                        <text>¥</text>
-                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
-                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
-                                    </view>
-                                    <TnIcon name="cart" size="30rpx" @tap.stop="addToCart(item)" />
-                                </view>
-                            </template>
-                            <template #right="{ item }">
-                                <view class="image-data" :data-prodid="item.prodId" @click="toProdPage">
-                                    <image class="image" :src="item.pic" mode="widthFix" />
-                                    <view class="tn-text-ellipsis-1">{{ item.prodName }}</view>
-                                    <view class="tn-text-ellipsis-1">{{ item.brief }}</view>
-                                    <view>
-                                        <text>¥</text>
-                                        <text>{{ wxs.parsePrice(item.price)[0] }}</text>
-                                        <text>.{{ wxs.parsePrice(item.price)[1] }}</text>
-                                    </view>
-                                    <TnIcon name="cart" size="30rpx" @tap.stop="addToCart(item)" />
-                                </view>
-                            </template>
-                        </TnWaterFall>
                     </view>
                 </view>
             </view>
@@ -194,14 +179,9 @@ import TnSearchBox from '@tuniao/tnui-vue3-uniapp/components/search-box/src/sear
 import TnSwiper from '@tuniao/tnui-vue3-uniapp/components/swiper/src/swiper.vue'
 import TnNoticeBar from '@tuniao/tnui-vue3-uniapp/components/notice-bar/src/notice-bar.vue'
 import TnScrollList from '@tuniao/tnui-vue3-uniapp/components/scroll-list/src/scroll-list.vue'
-import TnSwitchTab from '@tuniao/tnui-vue3-uniapp/components/switch-tab/src/switch-tab.vue'
 import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue'
 import TnWaterFall from '@tuniao/tnui-vue3-uniapp/components/water-fall/src/water-fall.vue'
 import TnTitle from '@tuniao/tnui-vue3-uniapp/components/title/src/title.vue'
-
-// 当前选中的标签索引
-const currentTabIndex = ref(0)
-const tabs = ref([])
 
 const wxs = number()
 const indexImgs = ref([])
@@ -213,7 +193,7 @@ type Taglist = {
     id: number,
     title: string,
     seq: string,
-    style: number,
+    style: string,
     prods: Array<{
         // 针对 TypeScript 只初始化了 prodId 属性
         pic: string,
@@ -392,11 +372,10 @@ const getTag = () => {
         }) => {
             console.log(data)
             taglist.value = data
-            tabs.value = data.map((item: { title: string }) => item.title)
             for (let i = 0; i < data.length; i++) {
                 updata.value = false
                 updata.value = true
-                data[i].style = Number(data[i].style)
+                // data[i].style = Number(data[i].style)
                 getTagProd(data[i].id, i)
             }
         })

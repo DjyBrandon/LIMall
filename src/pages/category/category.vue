@@ -1,9 +1,9 @@
 <template>
+    <view class="tn-pl-sm tn-pr-sm">
+        <TnSearchBox shape="round" search-button="false" border-color="tn-blue" placeholder-color="＃696969" size="sm"
+            placeholder="请输入搜索关键词" @search="toSearchPage" />
+    </view>
     <view class="container">
-        <view class="tn-pl-sm tn-pr-sm">
-            <TnSearchBox shape="round" search-button="false" border-color="tn-blue" placeholder-color="＃696969" size="sm"
-                placeholder="请输入搜索关键词" @search="toSearchPage" />
-        </view>
         <!-- 滚动内容区 -->
         <view class="main">
             <!-- 左侧菜单start -->
