@@ -39,7 +39,7 @@
         </view>
 
         <!-- 商品分类 -->
-        <view class="tn-ml-xs tn-mr-xs tn-radius" style="background-color: #fff;">
+        <view style="background-color: #fff;">
             <TnScrollList>
                 <view class="tn-pt item-container">
                     <view v-for="(item, index) in categoryList" :key="index"
@@ -72,7 +72,8 @@
                     </view>
                     <view class="tn-flex-wrap">
                         <view class="tn-p-xs tn-w-1-3" v-for="(prod, index) in item.prods" :key="index">
-                            <view class="tn-radius tn-shadow tn-h-full" style="background-color: white; overflow: hidden;">
+                            <view class="tn-radius tn-shadow tn-h-full" :data-prodid="prod.prodId" @click="toProdPage"
+                                style="background-color: white; overflow: hidden;">
                                 <image :src="prod.pic" mode="aspectFill"
                                     style="border-radius: 0; width: 100%; height: 223rpx" />
                                 <view class="tn-h-full">
@@ -102,7 +103,7 @@
                             </view>
                         </view>
                     </view>
-                    <TnWaterFall :data="item.prods" mode="calc">
+                    <TnWaterFall :data="item.prods">
                         <template #left="{ item }">
                             <view class="image-data tn-shadow" :data-prodid="item.prodId" @click="toProdPage">
                                 <image class="image" :src="item.pic" mode="widthFix" />

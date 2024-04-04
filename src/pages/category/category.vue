@@ -3,48 +3,46 @@
         <TnSearchBox shape="round" search-button="false" border-color="tn-blue" placeholder-color="＃696969" size="sm"
             placeholder="请输入搜索关键词" @search="toSearchPage" />
     </view>
-    <view class="container">
-        <!-- 滚动内容区 -->
-        <view class="main">
-            <!-- 左侧菜单start -->
-            <scroll-view scroll-y="true" class="leftmenu">
-                <block v-for="(item, index) in categoryList" :key="index">
-                    <view :class="'menu-item ' + (selIndex == index ? 'active' : '') + ' '" :data-index="index"
-                        :data-id="item.categoryId" @tap="onMenuTab">
-                        {{ item.categoryName }}
+    <!-- 滚动内容区 -->
+    <view class="tn-flex" style="height: 100vh;">
+        <!-- 左侧菜单start -->
+        <scroll-view scroll-y="true" class="leftmenu">
+            <block v-for="(item, index) in categoryList" :key="index">
+                <view :class="'menu-item ' + (selIndex == index ? 'active' : '') + ' '" :data-index="index"
+                    :data-id="item.categoryId" @tap="onMenuTab">
+                    {{ item.categoryName }}
+                </view>
+            </block>
+            <view v-if="!categoryList || !categoryList.length" class="ca-empty">
+                {{ categoryList && categoryList.length ? '该分类下暂无商品' : '暂无商品' }}
+            </view>
+        </scroll-view>
+        <!-- 左侧菜单end -->
+
+        <!-- 右侧内容start -->
+        <scroll-view scroll-y="true" class="rightcontent">
+            <view class="adver-map">
+                <view class="item-a">
+                    <image :src="categoryImg" mode="widthFix" />
+                </view>
+            </view>
+            <!-- 子分类 -->
+            <view v-if="subCategoryList.length" class="th-cate-con">
+                <block v-for="(thCateItem, index) in subCategoryList" :key="index">
+                    <view class="sub-category">
+                        <view class="sub-category-item" :data-categoryid="thCateItem.categoryId"
+                            :data-parentid="thCateItem.parentId" @tap="toCatePage">
+                            <image :src="thCateItem.pic" class="more-pic" mode="widthFix" />
+                            <text>{{ thCateItem.categoryName }}</text>
+                        </view>
                     </view>
                 </block>
-                <view v-if="!categoryList || !categoryList.length" class="ca-empty">
-                    {{ categoryList && categoryList.length ? '该分类下暂无商品' : '暂无商品' }}
-                </view>
-            </scroll-view>
-            <!-- 左侧菜单end -->
-
-            <!-- 右侧内容start -->
-            <scroll-view scroll-y="true" class="rightcontent">
-                <view class="adver-map">
-                    <view class="item-a">
-                        <image :src="categoryImg" mode="widthFix" />
-                    </view>
-                </view>
-                <!-- 子分类 -->
-                <view v-if="subCategoryList.length" class="th-cate-con">
-                    <block v-for="(thCateItem, index) in subCategoryList" :key="index">
-                        <view class="sub-category">
-                            <view class="sub-category-item" :data-categoryid="thCateItem.categoryId"
-                                :data-parentid="thCateItem.parentId" @tap="toCatePage">
-                                <image :src="thCateItem.pic" class="more-pic" mode="widthFix" />
-                                <text>{{ thCateItem.categoryName }}</text>
-                            </view>
-                        </view>
-                    </block>
-                </view>
-                <view v-else class="cont-item empty">
-                    该分类下暂无子分类~
-                </view>
-            </scroll-view>
-            <!-- 右侧内容end -->
-        </view>
+            </view>
+            <view v-else class="cont-item empty">
+                该分类下暂无子分类~
+            </view>
+        </scroll-view>
+        <!-- 右侧内容end -->
     </view>
 </template>
   
