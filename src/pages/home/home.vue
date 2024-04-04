@@ -51,8 +51,6 @@
             </TnScrollList>
         </view>
 
-
-
         <!-- 商品展示 -->
         <view v-if="updata">
             <view v-for="(item, index) in tagList" :key="index">

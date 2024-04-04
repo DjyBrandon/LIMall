@@ -1,6 +1,7 @@
 <template>
     <view class="container">
         <view>
+            <test />
             <block v-for="(item, index) in prodList" :key="index">
                 <production :item="item" />
             </block>
@@ -18,6 +19,7 @@ const current = ref(1)
 const size = ref(10)
 const pages = ref(0)
 const tagid = ref(0)
+
 /**
  * 生命周期函数--监听页面加载
  */

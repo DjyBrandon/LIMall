@@ -1,23 +1,26 @@
 <template>
-    <view class="container">
-        <view class="tn-m-xs" v-for="(item, index) in news" :key="index">
-            <TnListItem right-icon="right" bottom-border radius>
-
+    <view style="background-color: #F8F7F8; height: 100vh">
+        <view class="tn-w tn-m-sm tn-radius" style="background-color: white;" v-for="(item, index) in news" :key="index">
+            <TnListItem right-icon="right" bottom-border>
                 <view :data-id="item.id" @tap="toNewsDetail">
-                    <TnIcon name="notice-fill" class="tn-pr-xs" size="25" />{{ item.title }}
+                    {{ item.title }}
                 </view>
             </TnListItem>
-            <view>{{ item.publishTime }}</view>
+            <view class="tn-flex-end-end">
+                <view class="tn-round tn-text-xs tn-gray-light_bg tn-m-xs tn-pl-sm tn-pr-sm">
+                    {{ item.publishTime }}
+                </view>
+            </view>
         </view>
-    </view>
-    <view v-if="!news || !news.length">
-        <TnEmpty mode="data">
-            <template #icon>
-                <image src="https://resource.tuniaokj.com/images/empty/alien/12.png"
-                    style="height: 100rpx; width: 100rpx;" />
-            </template>
-            <template #tips>暂无公告</template>
-        </TnEmpty>
+        <view v-if="!news || !news.length">
+            <TnEmpty mode="data">
+                <template #icon>
+                    <image src="https://resource.tuniaokj.com/images/empty/alien/12.png"
+                        style="height: 100rpx; width: 100rpx;" />
+                </template>
+                <template #tips>暂无公告</template>
+            </TnEmpty>
+        </view>
     </view>
 </template>
   
