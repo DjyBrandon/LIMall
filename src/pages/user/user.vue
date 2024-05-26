@@ -162,7 +162,9 @@ const orderAmount = ref('')
  */
 onMounted(() => {
     loginResult.value = uni.getStorageSync('loginResult')
+    console.log('loginResult', loginResult.value)
     isAuthInfo.value = !!loginResult.value
+    console.log('isAuthInfo', isAuthInfo.value)
     // 加载订单数字
     if (isAuthInfo.value) {
         uni.showLoading()

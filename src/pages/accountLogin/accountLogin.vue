@@ -65,7 +65,7 @@ onMounted(() => {
     })
 })
 
-const principal = ref('brandon') // 账号
+const principal = ref('Brandon') // 账号
 const errorTips = ref(0) // 错误提示
 watch(
     () => principal.value,

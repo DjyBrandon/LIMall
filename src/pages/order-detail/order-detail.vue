@@ -224,6 +224,7 @@ const loadOrderDetail = (orderNum) => {
         }
     })
         .then(({ data }) => {
+            console.log(data)
             orderNumber.value = orderNum
             actualTotal.value = data.actualTotal
             userAddrDto.value = data.userAddrDto

@@ -136,6 +136,7 @@ const getActProd = (url) => {
                 list = list.concat(data.records)
             }
             prodList.value = list
+            console.log('getActProd prodList', prodList.value)
             pages.value = data.pages
             uni.hideLoading()
         })
@@ -163,6 +164,7 @@ const getCollectionProd = () => {
                 list = list.concat(data.records)
             }
             prodList.value = list
+            console.log('getCollectionProd prodList', prodList.value)
             pages.value = data.pages
             uni.hideLoading()
         })
@@ -190,6 +192,7 @@ const getTagProd = () => {
                 list = prodList.value.concat(data.records)
             }
             prodList.value = list
+            console.log('getTagProd prodList', prodList.value)
             pages.value = data.pages
             uni.hideLoading()
         })
